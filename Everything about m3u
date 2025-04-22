@@ -1,0 +1,132 @@
+
+# 🎵 M3U & M3U8 Playlist File Formats Guide
+
+> Learn everything about M3U/M3U8 playlist structures, tags, IPTV, and HLS streaming.  
+> _Made with ❤️ by Techie_
+
+---
+
+## 📚 Table of Contents
+- [📁 What is M3U?](#-what-is-m3u)
+- [🧾 Basic M3U Format](#-basic-m3u-format)
+- [📺 IPTV M3U Format](#-iptv-m3u-format)
+- [🌐 HLS M3U8 Format](#-hls-m3u8-format)
+  - [🔁 Master Playlist](#-master-playlist)
+  - [🎥 Media Playlist](#-media-playlist)
+- [🏷️ Common Tags Explained](#️-common-tags-explained)
+- [💡 Real Example](#-real-example)
+- [📎 Notes](#-notes)
+
+---
+
+## 📁 What is M3U?
+
+**M3U (MP3 URL)** is a file format used to create playlists for audio or video players.  
+**M3U8** is the UTF-8 encoded version, mainly used in HTTP Live Streaming (**HLS**).
+
+---
+
+## 🧾 Basic M3U Format
+
+```m3u
+#EXTM3U
+#EXTINF:123, Sample Artist - Sample title
+http://www.example.com/music.mp3
+```
+
+### 🔍 Breakdown:
+- `#EXTM3U`: Declares the file as an extended M3U.
+- `#EXTINF`: Provides duration (in seconds) and title.
+- URL: The actual media file link.
+
+---
+
+## 📺 IPTV M3U Format
+
+Often used to stream live TV with metadata.
+
+```m3u
+#EXTM3U
+#EXTINF:-1 tvg-id="abc" tvg-name="Channel 1" tvg-logo="http://logo.com/1.png" group-title="News",Channel 1
+http://stream.example.com/live/abc.m3u8
+```
+
+### 🏷 Tags:
+- `tvg-id`: Unique channel ID for EPG.
+- `tvg-name`: Channel display name.
+- `tvg-logo`: Channel logo URL.
+- `group-title`: Category grouping (e.g., Sports, Movies).
+
+---
+
+## 🌐 HLS M3U8 Format
+
+Used for adaptive bitrate streaming via HTTP.
+
+### 🔁 Master Playlist
+
+```m3u
+#EXTM3U
+#EXT-X-STREAM-INF:BANDWIDTH=1280000,RESOLUTION=1280x720
+https://example.com/stream1.m3u8
+#EXT-X-STREAM-INF:BANDWIDTH=2560000,RESOLUTION=1920x1080
+https://example.com/stream2.m3u8
+```
+
+### 🎥 Media Playlist
+
+```m3u
+#EXTM3U
+#EXT-X-VERSION:3
+#EXT-X-TARGETDURATION:10
+#EXT-X-MEDIA-SEQUENCE:0
+#EXTINF:10.0,
+segment0.ts
+#EXTINF:10.0,
+segment1.ts
+#EXT-X-ENDLIST
+```
+
+---
+
+## 🏷️ Common Tags Explained
+
+| Tag | Description |
+|-----|-------------|
+| `#EXTM3U` | Declares the playlist |
+| `#EXTINF:<duration>,<title>` | File info before media link |
+| `#EXT-X-VERSION:<n>` | HLS protocol version |
+| `#EXT-X-TARGETDURATION:<n>` | Max duration of a segment |
+| `#EXT-X-MEDIA-SEQUENCE:<n>` | First media sequence number |
+| `#EXT-X-STREAM-INF:<params>` | Info for a variant stream |
+| `#EXT-X-ENDLIST` | Playlist termination |
+| `#EXT-X-KEY:<params>` | DRM/Encryption key |
+| `#EXT-X-MAP:<URI>` | Initialization segment |
+| `#EXT-X-DISCONTINUITY` | Marks a timeline gap |
+| `#EXT-X-BYTERANGE:<n>@<o>` | Byte range for media segments |
+
+---
+
+## 💡 Real Example (IPTV Channel)
+
+```m3u
+#EXTM3U
+#EXTINF:-1 tvg-id="bbc1.uk" tvg-name="BBC One" tvg-logo="https://logos.com/bbc1.png" group-title="UK News",BBC One HD
+http://live.example.com/bbc1/stream.m3u8
+```
+
+---
+
+## 📎 Notes
+
+- M3U = Playlist for local or online files.
+- M3U8 = Used in HLS (streaming playlists).
+- Great for use in apps like **VLC**, **TiviMate**, **Kodi**, etc.
+
+---
+
+## ✍️ Author
+
+Made with ❤️ by **Techie**  
+For more guides, follow me on GitHub!
+
